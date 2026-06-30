@@ -10,6 +10,10 @@ This project implements Reversi/Othello in Java for the CHC6186 Advanced Object-
 - `src/test/java/edu/coursework/reversi/model` - JUnit model tests.
 - `docs` - UML and report support material.
 
+## Repository
+
+Private repository: https://github.com/ChenZu1112/private-repo
+
 ## Run
 
 GUI:
