@@ -1,0 +1,11 @@
+﻿Maven test result:
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+
+Test class:
+src/test/java/edu/coursework/reversi/model/ModelTest.java
+
+Scenarios:
+1. Standard opening legal moves.
+2. Illegal moves rejected without changing the board.
+3. Valid move flips a disc and undo restores the previous state.

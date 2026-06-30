@@ -1,0 +1,153 @@
+classDiagram
+    class Observable {
+        <<java.util>>
+    }
+
+    class Observer {
+        <<java.util>>
+        +update(Observable, Object) void
+    }
+
+    class ReversiModel {
+        <<interface>>
+        +BOARD_SIZE int
+        +reset() void
+        +newGame() void
+        +placeDisc(int, int) boolean
+        +undo() boolean
+        +isLegalMove(int, int) boolean
+        +getLegalMoves() List~Move~
+        +getHint() Optional~Move~
+        +getCell(int, int) Disc
+        +getBoardCopy() Disc[][]
+        +getCurrentPlayer() Disc
+        +getScore(Disc) int
+        +isGameOver() boolean
+        +getWinner() Optional~Disc~
+        +setValidationFeedbackEnabled(boolean) void
+        +setHintEnabled(boolean) void
+        +setRandomStartingPlayerEnabled(boolean) void
+        +canUndo() boolean
+    }
+
+    class Model {
+        -DIRECTIONS int[][]
+        -random Random
+        -board Disc[][]
+        -currentPlayer Disc
+        -initialPlayer Disc
+        -gameOver boolean
+        -validationFeedbackEnabled boolean
+        -hintEnabled boolean
+        -randomStartingPlayerEnabled boolean
+        -undoSnapshot Snapshot
+        +reset() void
+        +newGame() void
+        +placeDisc(int, int) boolean
+        +undo() boolean
+        +isLegalMove(int, int) boolean
+        +getLegalMoves() List~Move~
+        +getHint() Optional~Move~
+        +getCell(int, int) Disc
+        +getBoardCopy() Disc[][]
+        +getCurrentPlayer() Disc
+        +getScore(Disc) int
+        +isGameOver() boolean
+        +getWinner() Optional~Disc~
+        -capturedDiscs(int, int, Disc) List~Move~
+        -advanceTurnAfterMove() void
+        -invariant() boolean
+    }
+
+    class Disc {
+        <<enum>>
+        EMPTY
+        BLACK
+        WHITE
+        +symbol() String
+        +opponent() Disc
+        +isPlayer() boolean
+    }
+
+    class Move {
+        -row int
+        -column int
+        +row() int
+        +column() int
+        +toHumanString() String
+    }
+
+    class ReversiController {
+        -model ReversiModel
+        -view ReversiView
+        +selectSquare(int, int) void
+        +undo() void
+        +reset() void
+        +newGame() void
+        +requestHint() void
+        +setValidationFeedbackEnabled(boolean) void
+        +setHintEnabled(boolean) void
+        +setRandomStartingPlayerEnabled(boolean) void
+    }
+
+    class ReversiView {
+        <<interface>>
+        +refresh() void
+        +showInvalidMove() void
+        +showHint(int, int) void
+        +showHintUnavailable() void
+        +showGameComplete(String) void
+    }
+
+    class ReversiFrame {
+        -model ReversiModel
+        -controller ReversiController
+        -squares SquareButton[][]
+        -currentPlayerLabel JLabel
+        -scoreLabel JLabel
+        -validationCheckBox JCheckBox
+        -hintCheckBox JCheckBox
+        -randomStartCheckBox JCheckBox
+        +update(Observable, Object) void
+        +refresh() void
+        +showInvalidMove() void
+        +showHint(int, int) void
+        +showHintUnavailable() void
+        +showGameComplete(String) void
+    }
+
+    class GuiMain {
+        +main(String[]) void
+    }
+
+    class CliMain {
+        -model ReversiModel
+        -scanner Scanner
+        +main(String[]) void
+        -handleCommand(String) boolean
+        -placeMove(String[]) void
+        -printBoard() void
+    }
+
+    class ModelTest {
+        +newGameProvidesStandardOpeningMoves() void
+        +illegalMovesAreRejectedWithoutChangingBoard() void
+        +validMoveFlipsDiscAndUndoRestoresPreviousState() void
+    }
+
+    Observable <|-- Model
+    ReversiModel <|.. Model
+    Observer <|.. ReversiFrame
+    ReversiView <|.. ReversiFrame
+    Model --> Disc
+    Model --> Move
+    Model --> Snapshot
+    ReversiController --> ReversiModel
+    ReversiController --> ReversiView
+    ReversiFrame --> ReversiModel
+    ReversiFrame --> ReversiController
+    GuiMain --> Model
+    GuiMain --> ReversiFrame
+    CliMain --> ReversiModel
+    CliMain --> Model
+    ModelTest --> Model

@@ -1,0 +1,41 @@
+﻿Reversi CLI
+Commands: move <row> <col>, undo, hint, reset, new, score, board, help, quit
+
+    1 2 3 4 5 6 7 8
+ 1  . . . . . . . . 
+ 2  . . . . . . . . 
+ 3  . . . . . . . . 
+ 4  . . . W B . . . 
+ 5  . . . B W . . . 
+ 6  . . . . . . . . 
+ 7  . . . . . . . . 
+ 8  . . . . . . . . 
+Turn: Black
+Score: Black 2 - White 2
+> Score: Black 2 - White 2
+> Hint: play (3, 4)
+> 
+    1 2 3 4 5 6 7 8
+ 1  . . . . . . . . 
+ 2  . . . . . . . . 
+ 3  . . . B . . . . 
+ 4  . . . B B . . . 
+ 5  . . . B W . . . 
+ 6  . . . . . . . . 
+ 7  . . . . . . . . 
+ 8  . . . . . . . . 
+Turn: White
+Score: Black 4 - White 1
+> 
+    1 2 3 4 5 6 7 8
+ 1  . . . . . . . . 
+ 2  . . . . . . . . 
+ 3  . . . . . . . . 
+ 4  . . . W B . . . 
+ 5  . . . B W . . . 
+ 6  . . . . . . . . 
+ 7  . . . . . . . . 
+ 8  . . . . . . . . 
+Turn: Black
+Score: Black 2 - White 2
+> 
